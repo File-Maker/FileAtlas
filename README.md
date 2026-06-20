@@ -28,11 +28,13 @@ In Windows PowerShell, run:
 Get-FileHash -Algorithm SHA256 .\FileAtlasSetup-1.0.0.exe
 ```
 
-Expected SHA-256:
+Expected SHA-256 (for example):
 
 ```text
 9C272EEE8063395C3F9C88677DFFF3AC4478C56C7DA113FC801B881D1F46C06E
 ```
+
+Every new release comes with its own SHA-256 File
 
 ## Features
 
