@@ -1,55 +1,67 @@
 # FileAtlas
 
-FileAtlas is a local Windows file-space visualizer with a deliberate Windows 95-inspired interface.
+FileAtlas is a local Windows file-space visualizer with a retro Windows 95-style interface.
 
-It displays drives, folders, and files as a zoomable treemap where larger boxes represent greater disk usage. FileAtlas is designed for local storage analysis, duplicate discovery, cleanup review, and safer deletion workflows.
+It shows drives, folders, and files as a zoomable treemap where larger boxes use more disk space. It is designed for local storage cleanup, duplicate discovery, and safer review-before-delete workflows.
 
-**Copyright © 2026 Saba Iakobidze. All rights reserved.**
+Copyright (c) 2026 Saba Iakobidze. All rights reserved.
 
 ## Download
 
-Download the latest Windows installer from the project’s GitHub Releases page:
+Download the latest installer from the project releases:
 
-`FileAtlasSetup-1.0.0.exe`
+`FileAtlasSetup-1.4.4.exe`
 
-Python is bundled with FileAtlas. Users do not need to install Python separately.
+Users only need the installer. Python is bundled into the app build and is not required on the user's computer.
 
-## Verify the Download
+## Verify Download - OPTIONAL (FOR USERS THAT HAVE CYBERSECURITY CONCERNS)
 
-Verification is optional. You can compare the installer’s SHA-256 checksum to confirm that the downloaded file is complete and unchanged.
-
-The checksum is published in:
+The SHA-256 checksum for the current installer is in:
 
 `SHA256SUMS.txt`
 
-In Windows PowerShell, run:
+On Windows PowerShell:
 
 ```powershell
-Get-FileHash -Algorithm SHA256 .\FileAtlasSetup-1.0.0.exe
+Get-FileHash -Algorithm SHA256 .\FileAtlasSetup-1.4.4.exe
 ```
 
-Expected SHA-256 (for example):
+Expected hash:
 
 ```text
-9C272EEE8063395C3F9C88677DFFF3AC4478C56C7DA113FC801B881D1F46C06E
+74a298362c4dec23aa11d48753106cffe9ac942189a3f3f18a73d59a5a25612e
 ```
-
-Every new release comes with its own SHA-256 File
 
 ## Features
 
-- Native Windows desktop application.
-- Lightweight Windows 95-inspired interface.
+- Native Windows desktop app.
+- Retro Windows 95-inspired UI.
 - Zoomable treemap for drives, folders, and files.
-- Mouse-wheel visual zoom without changing directories.
+- Mouse-wheel visual zoom without changing folders.
 - Drag-to-pan while zoomed in.
-- Middle-click Back navigation.
-- Refresh preserves the active search and filter text.
-- Dark, light, and native themes.
+- Middle-click treemap Back navigation.
+- Refresh preserves the active search/filter text.
+- FAFS background daemon tracks local filesystem events for live refresh.
+- FileAtlas Base renders known FAFS catalog data immediately, then performs a catch-up scan for partial or shallow catalog views and sends that knowledge back to FAFS.
+- Base retries FAFS learning once if the daemon is still starting.
+- Base live refresh handles FAFS service restarts and refreshes affected views without relying on stale shallow signatures.
+- User-opened folders are prioritized ahead of background FAFS catalog work so interactive browsing responds first.
+- Analytics can show local mapped-file and storage-history data from the FAFS catalog even while the live daemon is starting.
+- Dark, light, and native theme selection is shared by Base, Analytics, and Dev.
+- FAFS startup uses lightweight health checks and defers heavier retrofit, snapshot, and deep catalog tasks.
+- FileAtlas Analytics runs from the tray and shows digestible storage flow, cleanup, and drive-change history over rolling or custom time ranges.
+- FileAtlas Analytics includes a 1-hour view plus 24-hour, 7-day, 30-day, 1-year, and custom date/time ranges.
+- FileAtlas Dev is an optional password-protected local diagnostic tool for FAFS health, internal file inspection, timestamped event checks, and debug reports.
+- FAFS performs a first local catalog, then relies on filesystem events with scheduled light/deep checks instead of repeatedly scanning whole drives.
+- FAFS separates user activity from system/background noise so cache and log churn does not dominate the app.
+- FAFS compares the latest saved baseline when it starts and records detected offline changes as session-start changes.
+- FAFS records timestamped `.falog` event segments, `.fasnap` catalog snapshots, a SQL-compatible `.faidx` FileAtlas catalog index, local hashes, chunk metadata, disk extents, and lazy parity shards for future recovery tools.
+- FAFS creates and migrates local FileAtlas internal files including `.faidx`, `.faconfig`, `.falog`, `.fasnap`, `.farm`, `.fapar`, `.fasec`, and `.fachk`.
+- FileAtlas Analytics includes FAFS settings for history, performance, protection, priority folders, storage impact, cache maintenance, and advanced status.
 - Duplicate-file marking based on matching file contents.
-- Cleanup queue for reviewing multiple files and folders before deletion.
-- Normal deletion uses the Windows Recycle Bin whenever supported.
-- Settings and cache are stored under `%LOCALAPPDATA%\FileAtlas`.
+- Cleanup queue for reviewing multiple files/folders before deletion.
+- Delete uses the Windows Recycle Bin.
+- Settings, cache, FAFS metadata, and Analytics status are stored under `%LOCALAPPDATA%\FileAtlas`.
 - Protected system locations are blocked from deletion.
 
 ## System Requirements
@@ -57,46 +69,49 @@ Every new release comes with its own SHA-256 File
 Minimum:
 
 - Windows 10 or Windows 11, 64-bit
-- Dual-core processor
+- Dual-core CPU
 - 4 GB RAM
 - 100 MB free disk space
-- Permission to access the drives and folders being scanned
+- Local drive access permissions
 
 Recommended:
 
 - Windows 11, 64-bit
 - 8 GB RAM or more
 - SSD for faster scans
-
-Administrator rights are not required for normal use. Some protected locations may remain inaccessible unless FileAtlas is explicitly launched with elevated privileges.
+- Administrator access for scanning some protected locations
 
 No internet connection is required.
 
 ## Controls
 
-- **Single click:** Select an item.
-- **Ctrl/Shift click:** Add or remove an item from the cleanup queue.
-- **Double click:** Open a folder or drive.
-- **Mouse wheel:** Zoom the treemap boxes in or out.
-- **Drag while zoomed:** Pan around the enlarged treemap.
-- **Middle click:** Go back.
-- **Right click:** Open the action menu.
-- **Back / Up / breadcrumbs:** Navigate folder history.
-- **Refresh:** Reload immediate contents while preserving the active filter.
-- **Deep rescan:** Ignore cached folder sizes and recalculate them.
-- **Search box:** Filter the current folder level by name.
+- Single click: select an item.
+- Ctrl/Shift click: add or remove an item from the cleanup queue.
+- Double click: open a folder or drive.
+- Mouse wheel: zoom the treemap boxes in or out.
+- Drag while zoomed: pan around the enlarged treemap.
+- Middle click: go back.
+- Delete key: move the cleanup queue to the Recycle Bin.
+- Right click: open the action menu.
+- Back / Up / breadcrumbs: navigate folder history.
+- Refresh: reload immediate contents while keeping the current filter.
+- Live refresh: FAFS detects filesystem changes and FileAtlas refreshes without clearing the search box.
+- Deep rescan: ignore cached folder sizes and recalculate them.
+- Search box: filter the current folder level by name.
 
 ## Safety
 
-FileAtlas processes filesystem information locally. It does not upload files, filenames, directory structures, or scan results.
+FileAtlas is local-only. It does not upload files or scan results.
 
-Normal deletion attempts to move selected items to the Windows Recycle Bin. If an item cannot be moved safely, FileAtlas reports the failure and does not silently fall back to permanent deletion.
+FAFS runs locally as the FileAtlas background foundation. It watches mounted drives, records local filesystem events, tracks Recycle Bin movement, stores metadata, writes timestamped internal history files, stores lazy parity shards for future recovery tools, and exposes a local-only API on `127.0.0.1`.
+
+Deletion uses `Send2Trash`, so normal delete actions move items to the Windows Recycle Bin instead of permanently deleting them.
 
 FileAtlas blocks deletion of:
 
 - drive roots;
-- the Windows directory;
-- Program Files root directories;
+- Windows;
+- Program Files roots;
 - ProgramData;
 - Recovery;
 - System Volume Information;
@@ -104,23 +119,27 @@ FileAtlas blocks deletion of:
 - FileAtlas application files;
 - FileAtlas settings and cache files.
 
-Items inside Program Files are treated as high-risk rather than ordinary storage. Direct deletion requires Advanced mode and a stronger warning. Use an application’s official uninstaller whenever possible.
+Program Files child items are treated as high-risk rather than ordinary storage. Deleting them requires Advanced mode and a stronger warning. Prefer the application's official uninstaller whenever possible.
 
 ## Notes
 
-The first scan of a large drive can take time because Windows does not store recursive folder sizes as immediately available metadata. FileAtlas keeps the interface responsive by listing the current directory first and calculating folder sizes in the background.
+The first scan of a large drive can take time because Windows does not store recursive folder sizes as instant metadata. FileAtlas keeps the interface responsive by listing the current folder first, then calculating folder sizes in the background.
 
-Unsigned installers may trigger a Windows SmartScreen warning. FileAtlas 1.0.0 is not currently code-signed.
+FileAtlas Analytics starts with FAFS and can be opened from the Start Menu or tray. Closing the Analytics window hides it to the tray. Quitting from the tray shuts down the FileAtlas background stack until FileAtlas Base is launched again.
 
-Use FileAtlas responsibly. To the maximum extent permitted by applicable law, the publisher is not responsible for data loss resulting from files selected for deletion by the user.
+FileAtlas Dev is optional and intended for local diagnostics. Installing it requires the developer password in the installer, and opening it requires the same password again inside the app. It can inspect FAFS health, database counts, recent history ranges, `.falog` files, `.fasnap` files, and debug reports stored on this computer.
+
+Unsigned installers may show a Windows SmartScreen warning. FileAtlas is not code-signed yet because code-signing certificates are expensive.
+
+Use FileAtlas responsibly. If you delete something important and then clear the Recycle Bin, the publisher is not liable for the lost data.
 
 ## Support
 
 For help, email:
 
-[iakobidzesab@gmail.com](mailto:iakobidzesab@gmail.com)
+`iakobidzesab@gmail.com`
 
-## Privacy and Third-Party Notices
+## Privacy And Notices
 
-- See [PRIVACY.md](PRIVACY.md) for information about local data processing.
-- See [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt) for third-party software notices.
+- See [PRIVACY.md](PRIVACY.md) for what FileAtlas stores, transmits, or shares.
+- See [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt) for included third-party components.
