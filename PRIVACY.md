@@ -1,34 +1,39 @@
-# FileAtlas Privacy Notice
+# FileAtlas Privacy
 
-**Last updated: 21 June 2026**
-
-FileAtlas is a local Windows desktop application for visualizing disk usage, finding duplicate files, and reviewing files before deletion.
+FileAtlas is a local Windows desktop application for visualizing disk usage.
 
 ## Summary
 
-FileAtlas processes filesystem information locally on the user’s device.
+FileAtlas does not collect, upload, sell, or share personal data.
 
-The publisher does not remotely collect, receive, upload, sell, or share the user’s filenames, file contents, paths, hashes, directory structures, scan results, settings, or usage data.
+FileAtlas runs locally on your computer. It scans the folders and files you open so it can display disk usage, calculate folder sizes, detect duplicate files, and manage the cleanup queue.
 
-FileAtlas does not require an account.
+FileAtlas also installs FAFS, the local FileAtlas background foundation. FAFS watches mounted drives for filesystem changes and provides local storage-flow data to FileAtlas Analytics.
 
-## Information FileAtlas Reads
+FileAtlas Dev is an optional password-protected local diagnostic tool. It is intended for inspecting local FAFS health, internal files, database counts, and debug reports on the same computer.
 
-FileAtlas may read local filesystem information required to provide its features, including:
+## Data FileAtlas Reads
+
+FileAtlas may read local filesystem metadata, including:
 
 - file and folder names;
 - file and folder paths;
 - file sizes;
-- creation or modification dates where available;
+- modified dates;
 - folder contents;
-- mounted-drive information;
-- filesystem identifiers used to verify queued items before deletion.
+- mounted drive information;
+- file identifiers used to verify queued items before deletion.
+- local filesystem event history, including creates, deletes, renames, moves, Recycle Bin movement, and folder activity;
+- local event classification, such as user activity, system activity, and background/cache activity;
+- local saved filesystem baselines used to detect changes that happened while FileAtlas was not running;
+- local file identity, hash, chunk, lazy parity-shard, and disk extent metadata used to support future recovery features.
+- local FAFS internal files, including the SQL-compatible `.faidx` FileAtlas catalog index, `.faconfig` settings, `.falog` event segments, `.fasnap` catalog snapshots, `.farm` recovery metadata, `.fapar` parity metadata, `.fasec` safety policy, and `.fachk` checkpoint files.
 
-When duplicate scanning is enabled, FileAtlas may read file contents locally to calculate cryptographic hashes. These hashes are used to confirm whether files have identical content.
+When duplicate scanning is enabled, FileAtlas may read file contents locally to calculate cryptographic hashes. FAFS may also calculate hashes for smaller files and store recovery-oriented metadata locally. FileAtlas does not upload these hashes or metadata.
 
-## Information FileAtlas Stores
+## Data FileAtlas Stores
 
-FileAtlas stores settings and cache data locally under:
+FileAtlas stores local settings and cache data under:
 
 ```text
 %LOCALAPPDATA%\FileAtlas
@@ -36,53 +41,39 @@ FileAtlas stores settings and cache data locally under:
 
 This may include:
 
-- theme and interface preferences;
-- live-refresh settings;
+- theme and settings preferences;
 - scan exclusions;
 - folder-size cache data;
-- local scan or cache database files;
-- duplicate-scan metadata, if enabled by the application.
+- local scan/cache files;
+- FAFS catalog/index files, including the SQL-compatible `.faidx` FileAtlas catalog index;
+- FAFS internal files such as `.faconfig` settings, `.falog` timestamped event logs, `.fasnap` catalog snapshots, `.farm` recovery metadata, `.fapar` parity metadata, `.fasec` safety policy, and `.fachk` checkpoints;
+- FileAtlas Dev debug reports with the `.fadev` extension, if the user chooses to save them;
+- Analytics status files;
+- local event history and storage-flow summaries.
 
-FileAtlas does not intentionally create or retain copies of the user’s personal files.
+FileAtlas does not intentionally store copies of your files.
 
-## Information FileAtlas Transmits
+FAFS may lazily store small recovery parity shards for future FileAtlas recovery tools. Users can limit recovery and parity metadata to priority folders in FileAtlas Analytics settings. FAFS records identities, hashes, chunk records, parity groups, event history, catalog snapshots, and local catalog progress, but it does not provide file recovery by itself and does not intentionally store full backup copies of file contents.
 
-FileAtlas does not transmit the following to the publisher or to any third party:
+## Data FileAtlas Transmits
 
-- filenames;
-- file contents;
-- file hashes;
-- file or folder paths;
-- directory structures;
-- scan results;
-- application settings;
-- analytics;
-- telemetry;
-- usage data.
+FileAtlas does not transmit file names, file contents, scan results, settings, analytics, telemetry, or usage data to the publisher or to any third party.
 
-FileAtlas does not require an internet connection and does not contact a FileAtlas server during normal operation.
+FileAtlas does not require an internet connection.
 
-## Retention and Removal
-
-Local settings and cache data remain on the user’s device until they are cleared through FileAtlas, removed manually, or deleted from:
-
-```text
-%LOCALAPPDATA%\FileAtlas
-```
-
-Removing cached data does not delete the user’s original files.
+FAFS exposes a local-only API on `127.0.0.1` for FileAtlas components on the same computer.
 
 ## Deletion
 
-Normal deletion attempts to move selected files and folders to the Windows Recycle Bin whenever supported.
+Normal delete actions use the Windows Recycle Bin whenever supported.
 
-If an item cannot be moved safely, FileAtlas reports the failure. FileAtlas does not silently fall back to permanent deletion.
+FAFS records when files or folders are moved to the Recycle Bin and when items appear to be removed from the Recycle Bin.
 
-Files may become unrecoverable if the user later empties the Recycle Bin or removes them by another method.
+If you delete items with FileAtlas and later empty the Recycle Bin, those files may no longer be recoverable. Use FileAtlas responsibly.
 
 ## Support Email
 
-If a user contacts support by email, any information voluntarily included in the message is transmitted through the user’s email provider and the recipient’s email provider.
+If you contact support by email, any information you choose to include in that email is sent through your email provider.
 
 Support email:
 
@@ -92,9 +83,7 @@ iakobidzesab@gmail.com
 
 ## Third-Party Components
 
-FileAtlas includes or is built with third-party software components.
-
-See:
+FileAtlas includes third-party software components. See:
 
 ```text
 THIRD-PARTY-NOTICES.txt
