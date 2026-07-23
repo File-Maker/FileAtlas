@@ -4,15 +4,21 @@ FileAtlas is a local Windows file-space visualizer with a retro Windows 95-style
 
 It shows drives, folders, and files as a zoomable treemap where larger boxes use more disk space. It is designed for local storage cleanup, duplicate discovery, and safer review-before-delete workflows.
 
-Copyright (c) 2026 Saba Iakobidze. All rights reserved.
+Copyright © 2026 Saba Iakobidze. All rights reserved.
 
 ## Download
 
 Download the latest installer from the project releases:
 
-`FileAtlasSetup-1.4.4.exe`
+`FileAtlasSetup-1.5.3.exe`
 
 Users only need the installer. Python is bundled into the app build and is not required on the user's computer.
+
+Owner-only licence tools are packaged separately:
+
+`FileAtlasLicenseManagerSetup-1.5.3.exe`
+
+Normal users do not need the LicenseManager installer.
 
 ## Verify Download - OPTIONAL (FOR USERS THAT HAVE CYBERSECURITY CONCERNS)
 
@@ -23,13 +29,14 @@ The SHA-256 checksum for the current installer is in:
 On Windows PowerShell:
 
 ```powershell
-Get-FileHash -Algorithm SHA256 .\FileAtlasSetup-1.4.4.exe
+Get-FileHash -Algorithm SHA256 .\FileAtlasSetup-1.5.3.exe
 ```
 
-Expected hash:
+Expected hashes:
 
 ```text
-74a298362c4dec23aa11d48753106cffe9ac942189a3f3f18a73d59a5a25612e
+058545a138763014d6962f678d8b995f6a06235af69d07e34744b4e08a202dee  installer/FileAtlasSetup-1.5.3.exe
+920ad9b38dc4d27c88113cc75c2ca00f7a6aa0911afe5a8419c25da0d027ec5b  installer/FileAtlasLicenseManagerSetup-1.5.3.exe
 ```
 
 ## Features
@@ -51,12 +58,16 @@ Expected hash:
 - FAFS startup uses lightweight health checks and defers heavier retrofit, snapshot, and deep catalog tasks.
 - FileAtlas Analytics runs from the tray and shows digestible storage flow, cleanup, and drive-change history over rolling or custom time ranges.
 - FileAtlas Analytics includes a 1-hour view plus 24-hour, 7-day, 30-day, 1-year, and custom date/time ranges.
-- FileAtlas Dev is an optional password-protected local diagnostic tool for FAFS health, internal file inspection, timestamped event checks, and debug reports.
-- FAFS performs a first local catalog, then relies on filesystem events with scheduled light/deep checks instead of repeatedly scanning whole drives.
+- FileAtlas Dev is an optional local diagnostic tool. It installs as a program when selected, but privileged Dev features require a local `.falicense` certificate that FAFS validates.
+- FAFS performs a first local catalog, keeps crawling toward full disk knowledge, then combines filesystem events with scheduled light/deep checks.
 - FAFS separates user activity from system/background noise so cache and log churn does not dominate the app.
 - FAFS compares the latest saved baseline when it starts and records detected offline changes as session-start changes.
-- FAFS records timestamped `.falog` event segments, `.fasnap` catalog snapshots, a SQL-compatible `.faidx` FileAtlas catalog index, local hashes, chunk metadata, disk extents, and lazy parity shards for future recovery tools.
-- FAFS creates and migrates local FileAtlas internal files including `.faidx`, `.faconfig`, `.falog`, `.fasnap`, `.farm`, `.fapar`, `.fasec`, and `.fachk`.
+- FileAtlas Analytics does not treat unmeasured folder metadata changes as cleaned-up space. Folder-level changes are counted as changes until FAFS has a real measured size delta.
+- FAFS records timestamped FAStore `.falog` event segments, `.fasnap` catalog snapshots, FAStore catalog records, local hashes, chunk metadata, disk extents, and lazy parity shards for future recovery tools.
+- FAFS creates and migrates local FileAtlas internal files including `.faconfig`, `.falog`, `.fasnap`, `.farm`, `.fapar`, `.fasec`, `.fachk`, and FAStore table/WAL/manifest files.
+- FileAtlas 1.5.3 uses FAStore as the runtime storage engine. FAStore is an append-only local FileAtlas store with compact binary records, authenticated superblocks/manifests, FALZ compression, FACrypto integrity checks, write-ahead logging, persisted history indexes, table compaction, and catalog/history APIs owned by FAFS.
+- The public FileAtlas uninstaller lets users remove the app only, remove all local FileAtlas data, or remove selected data categories such as settings, history/catalog, logs/caches, recovery/parity metadata, installed licences, or private owner keys.
+- FileAtlas LicenseManager is a separate owner-only installer for issuing and inspecting FileAtlas Dev licences. It has its own Windows uninstaller, with an optional checkbox to remove private owner keys stored on this computer.
 - FileAtlas Analytics includes FAFS settings for history, performance, protection, priority folders, storage impact, cache maintenance, and advanced status.
 - Duplicate-file marking based on matching file contents.
 - Cleanup queue for reviewing multiple files/folders before deletion.
@@ -127,7 +138,7 @@ The first scan of a large drive can take time because Windows does not store rec
 
 FileAtlas Analytics starts with FAFS and can be opened from the Start Menu or tray. Closing the Analytics window hides it to the tray. Quitting from the tray shuts down the FileAtlas background stack until FileAtlas Base is launched again.
 
-FileAtlas Dev is optional and intended for local diagnostics. Installing it requires the developer password in the installer, and opening it requires the same password again inside the app. It can inspect FAFS health, database counts, recent history ranges, `.falog` files, `.fasnap` files, and debug reports stored on this computer.
+FileAtlas Dev is optional and intended for local diagnostics. If installed, it starts in a locked state until FAFS validates a local FileAtlas Dev `.falicense` certificate. Dev can create an offline licence request (`.fareq`) and import a licence (`.falicense`), but FAFS performs the authoritative validation and Dev does not decode or edit licence claims.
 
 Unsigned installers may show a Windows SmartScreen warning. FileAtlas is not code-signed yet because code-signing certificates are expensive.
 
