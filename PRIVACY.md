@@ -10,7 +10,9 @@ FileAtlas runs locally on your computer. It scans the folders and files you open
 
 FileAtlas also installs FAFS, the local FileAtlas background foundation. FAFS watches mounted drives for filesystem changes and provides local storage-flow data to FileAtlas Analytics.
 
-FileAtlas Dev is an optional password-protected local diagnostic tool. It is intended for inspecting local FAFS health, internal files, database counts, and debug reports on the same computer.
+FileAtlas Dev is an optional local diagnostic tool. It is intended for inspecting local FAFS health, internal files, FAStore/filetype counts, and debug reports on the same computer. Privileged Dev features require a local FileAtlas Dev `.falicense` certificate that FAFS validates on this computer.
+
+FileAtlas LicenseManager is a separate owner-only local tool for issuing and inspecting FileAtlas Dev licences. Normal users do not need it.
 
 ## Data FileAtlas Reads
 
@@ -27,7 +29,9 @@ FileAtlas may read local filesystem metadata, including:
 - local event classification, such as user activity, system activity, and background/cache activity;
 - local saved filesystem baselines used to detect changes that happened while FileAtlas was not running;
 - local file identity, hash, chunk, lazy parity-shard, and disk extent metadata used to support future recovery features.
-- local FAFS internal files, including the SQL-compatible `.faidx` FileAtlas catalog index, `.faconfig` settings, `.falog` event segments, `.fasnap` catalog snapshots, `.farm` recovery metadata, `.fapar` parity metadata, `.fasec` safety policy, and `.fachk` checkpoint files.
+- local FAFS internal files, including FAStore catalog/history files, binary `.faconfig` settings, `.falog` event segments, `.fasnap` catalog snapshots, `.farm` recovery metadata, `.fapar` parity metadata, `.fasec` safety policy, and `.fachk` checkpoint files.
+- local FileAtlas Dev licence state, including an installation ID, local public/private installation key pair protected on this computer, imported `.falicense` files, and activation state used by FAFS.
+- local FileAtlas LicenseManager private owner keys, if the owner-only LicenseManager is used on this computer.
 
 When duplicate scanning is enabled, FileAtlas may read file contents locally to calculate cryptographic hashes. FAFS may also calculate hashes for smaller files and store recovery-oriented metadata locally. FileAtlas does not upload these hashes or metadata.
 
@@ -45,11 +49,13 @@ This may include:
 - scan exclusions;
 - folder-size cache data;
 - local scan/cache files;
-- FAFS catalog/index files, including the SQL-compatible `.faidx` FileAtlas catalog index;
+- FAStore catalog/history/index files owned by FAFS;
 - FAFS internal files such as `.faconfig` settings, `.falog` timestamped event logs, `.fasnap` catalog snapshots, `.farm` recovery metadata, `.fapar` parity metadata, `.fasec` safety policy, and `.fachk` checkpoints;
 - FileAtlas Dev debug reports with the `.fadev` extension, if the user chooses to save them;
 - Analytics status files;
 - local event history and storage-flow summaries.
+- optional FileAtlas Dev licence request files (`.fareq`) and debug reports only when the user chooses to create or save them.
+- optional FileAtlas LicenseManager key backups (`.fakeybackup`) and issued licence files (`.falicense`) only when the owner chooses to create or save them.
 
 FileAtlas does not intentionally store copies of your files.
 
@@ -63,6 +69,10 @@ FileAtlas does not require an internet connection.
 
 FAFS exposes a local-only API on `127.0.0.1` for FileAtlas components on the same computer.
 
+FileAtlas Dev can create an offline licence request file (`.fareq`). That request contains an installation ID and public key so a licence can be issued for this installation. FileAtlas does not send the request anywhere automatically; the user must manually choose to share it.
+
+FileAtlas LicenseManager does not upload requests, licences, customer names, notes, or owner keys. It opens and saves local files only when the owner chooses those files.
+
 ## Deletion
 
 Normal delete actions use the Windows Recycle Bin whenever supported.
@@ -70,6 +80,8 @@ Normal delete actions use the Windows Recycle Bin whenever supported.
 FAFS records when files or folders are moved to the Recycle Bin and when items appear to be removed from the Recycle Bin.
 
 If you delete items with FileAtlas and later empty the Recycle Bin, those files may no longer be recoverable. Use FileAtlas responsibly.
+
+When uninstalling FileAtlas, users can choose to remove only the application, all local FileAtlas data, or selected local data categories such as settings, history/catalog, logs/caches, recovery/parity metadata, installed licences, and private owner keys.
 
 ## Support Email
 
