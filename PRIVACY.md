@@ -12,7 +12,9 @@ FileAtlas also installs FAFS, the local FileAtlas background foundation. FAFS wa
 
 FileAtlas Dev is an optional local diagnostic tool. It is intended for inspecting local FAFS health, internal files, FAStore/filetype counts, and debug reports on the same computer. Privileged Dev features require a local FileAtlas Dev `.falicense` certificate that FAFS validates on this computer.
 
-FileAtlas LicenseManager is a separate owner-only local tool for issuing and inspecting FileAtlas Dev licences. Normal users do not need it.
+FileAtlas LicenseManager is a separate owner-only local tool for issuing and inspecting FileAtlas Dev licenses. Normal users do not need it.
+
+FileAtlas Benchmark is a separate local benchmark/report tool. It creates isolated dummy test data and local reports so FileAtlas components can be stress tested without using normal FileAtlas history as benchmark noise.
 
 ## Data FileAtlas Reads
 
@@ -30,8 +32,9 @@ FileAtlas may read local filesystem metadata, including:
 - local saved filesystem baselines used to detect changes that happened while FileAtlas was not running;
 - local file identity, hash, chunk, lazy parity-shard, and disk extent metadata used to support future recovery features.
 - local FAFS internal files, including FAStore catalog/history files, binary `.faconfig` settings, `.falog` event segments, `.fasnap` catalog snapshots, `.farm` recovery metadata, `.fapar` parity metadata, `.fasec` safety policy, and `.fachk` checkpoint files.
-- local FileAtlas Dev licence state, including an installation ID, local public/private installation key pair protected on this computer, imported `.falicense` files, and activation state used by FAFS.
+- local FileAtlas Dev license state, including an installation ID, local public/private installation key pair protected on this computer, imported `.falicense` files, and activation state used by FAFS.
 - local FileAtlas LicenseManager private owner keys, if the owner-only LicenseManager is used on this computer.
+- local FileAtlas Benchmark report folders, raw metrics, charts, PDFs, and dummy benchmark files, if the Benchmark tool is used.
 
 When duplicate scanning is enabled, FileAtlas may read file contents locally to calculate cryptographic hashes. FAFS may also calculate hashes for smaller files and store recovery-oriented metadata locally. FileAtlas does not upload these hashes or metadata.
 
@@ -54,8 +57,9 @@ This may include:
 - FileAtlas Dev debug reports with the `.fadev` extension, if the user chooses to save them;
 - Analytics status files;
 - local event history and storage-flow summaries.
-- optional FileAtlas Dev licence request files (`.fareq`) and debug reports only when the user chooses to create or save them.
-- optional FileAtlas LicenseManager key backups (`.fakeybackup`) and issued licence files (`.falicense`) only when the owner chooses to create or save them.
+- optional FileAtlas Dev license request files (`.fareq`) and debug reports only when the user chooses to create or save them.
+- optional FileAtlas LicenseManager key backups (`.fakeybackup`) and issued license files (`.falicense`) only when the owner chooses to create or save them.
+- optional FileAtlas Benchmark reports under the selected benchmark output folder, by default `Documents\FileAtlas Benchmarks`.
 
 FileAtlas does not intentionally store copies of your files.
 
@@ -69,9 +73,11 @@ FileAtlas does not require an internet connection.
 
 FAFS exposes a local-only API on `127.0.0.1` for FileAtlas components on the same computer.
 
-FileAtlas Dev can create an offline licence request file (`.fareq`). That request contains an installation ID and public key so a licence can be issued for this installation. FileAtlas does not send the request anywhere automatically; the user must manually choose to share it.
+FileAtlas Dev can create an offline license request file (`.fareq`). That request contains an installation ID and public key so a license can be issued for this installation. FileAtlas does not send the request anywhere automatically; the user must manually choose to share it.
 
-FileAtlas LicenseManager does not upload requests, licences, customer names, notes, or owner keys. It opens and saves local files only when the owner chooses those files.
+FileAtlas LicenseManager does not upload requests, licenses, customer names, notes, or owner keys. It opens and saves local files only when the owner chooses those files.
+
+FileAtlas Benchmark does not upload benchmark results. It writes local raw data, charts, PDFs, and sandboxed dummy files only to the benchmark output folder selected by the user.
 
 ## Deletion
 
@@ -81,7 +87,9 @@ FAFS records when files or folders are moved to the Recycle Bin and when items a
 
 If you delete items with FileAtlas and later empty the Recycle Bin, those files may no longer be recoverable. Use FileAtlas responsibly.
 
-When uninstalling FileAtlas, users can choose to remove only the application, all local FileAtlas data, or selected local data categories such as settings, history/catalog, logs/caches, recovery/parity metadata, installed licences, and private owner keys.
+When uninstalling FileAtlas, users can choose to remove only the application, all local FileAtlas data, or selected local data categories such as settings, history/catalog, logs/caches, recovery/parity metadata, installed licenses, and private owner keys.
+
+When uninstalling FileAtlas Benchmark, users can optionally remove saved benchmark reports from `Documents\FileAtlas Benchmarks`.
 
 ## Support Email
 
