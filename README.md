@@ -10,14 +10,14 @@ Copyright © 2026 Saba Iakobidze. All rights reserved.
 
 Download the latest public installer from the project releases:
 
-`FileAtlasSetup-1.8.1.exe`
+`FileAtlasSetup-1.9.3.exe`
 
 Users only need the FileAtlas installer. Python and runtime dependencies are bundled into the app build and are not required on the user's computer.
 
 Separate tools:
 
-- `FileAtlasLicenseManagerSetup-1.8.1.exe` is owner-only and used to issue or inspect FileAtlas Dev licenses.
-- `FileAtlasBenchmarkSetup-1.8.1.exe` installs the local benchmark/report tool for stress testing FileAtlas components.
+- `FileAtlasLicenseManagerSetup-1.9.3.exe` is owner-only and used to issue or inspect FileAtlas Dev licenses.
+- `FileAtlasBenchmarkSetup-1.9.3.exe` installs the local benchmark/report tool for stress testing FileAtlas components.
 
 Normal users do not need LicenseManager or Benchmark.
 
@@ -30,15 +30,15 @@ The SHA-256 checksums for the current installers are in:
 On Windows PowerShell:
 
 ```powershell
-Get-FileHash -Algorithm SHA256 .\FileAtlasSetup-1.8.1.exe
+Get-FileHash -Algorithm SHA256 .\FileAtlasSetup-1.9.3.exe
 ```
 
 Expected hashes:
 
 ```text
-29d6e4b61dc15b46d41be4b755ab15fb652b8716d9e4e33a77b741b48d0d4f33  installer/FileAtlasSetup-1.8.1.exe
-bf0a79297564d8677a0f6597d9477c8b9c057e6605147823fc859903f4f18506  installer/FileAtlasLicenseManagerSetup-1.8.1.exe
-201e33dada0364d713dbdcff3d5dfe7df4dffb43da55c4d05ad4acc63e3c40d8  installer/FileAtlasBenchmarkSetup-1.8.1.exe
+2b33353668fbbfcecaf2333d44e5f88ac7d7ab230f92c20eb7fcdaee23e3f9d0  installer/FileAtlasSetup-1.9.3.exe
+5570ba2de74f6d42e8313c92b4db716f0436becf1a577cb896241c1b4a627a4f  installer/FileAtlasLicenseManagerSetup-1.9.3.exe
+ca0630bef42892d2f609424e93a23581d13979bcffd3e007b8d8c2af65ac1d82  installer/FileAtlasBenchmarkSetup-1.9.3.exe
 ```
 
 ## Documentation
@@ -63,6 +63,8 @@ bf0a79297564d8677a0f6597d9477c8b9c057e6605147823fc859903f4f18506  installer/File
 - Duplicate-file marking based on matching file contents.
 - Dark, light, and native theme selection shared across FileAtlas apps.
 - FileAtlas Base uses FAFS catalog data when available and teaches FAFS when it scans unmapped folders.
+- Base commits unacknowledged learning to a bounded local FAStore spool, then removes each record only after FAFS acknowledges the atomic batch.
+- Base keeps a bounded encrypted last-known view cache so a brief FAFS restart does not blank a known treemap or force a redundant rescan.
 - Last-known folder sizes render immediately while FAFS reconciles in the background.
 - User-opened folders and priority paths jump ahead of background cataloging.
 - NTFS volumes use saved journal cursors for incremental restart catch-up when the change journal remains continuous; complete recrawls are reserved for missing or invalid baselines.
@@ -71,9 +73,12 @@ bf0a79297564d8677a0f6597d9477c8b9c057e6605147823fc859903f4f18506  installer/File
 - FAFS records local timestamped history, snapshots, hashes, chunk metadata, and lazy parity metadata for future FileAtlas tools.
 - FAFS separates user, system, noise, and unknown activity so caches/logs do not dominate Analytics.
 - FileAtlas Analytics shows storage added, cleaned up, net change, change counts, Recycle Bin activity, recent activity, and drive/folder drill-downs.
+- Analytics preserves the last valid exact-range result while FAFS restarts and never replaces pending history with invented zeroes.
 - Analytics supports 1-hour, 24-hour, 7-day, 30-day, 1-year, and custom date/time ranges.
 - Analytics includes a shared settings hub for performance, throttling, priority folders, ignore paths, retention, cache maintenance, recovery scope, and Base settings.
 - FileAtlas Dev is optional and unlocks privileged diagnostic features through a local `.falicense` certificate validated by FAFS.
+- Raw native-format inspection is packaged only inside FAFS and requires a verified Dev process plus a short-lived licensed capability.
+- Current FileAtlas-native storage objects use authenticated encrypted binary envelopes; legacy supported generations are read and atomically migrated to current writers.
 - FileAtlas LicenseManager is a separate owner-only app for issuing and inspecting Dev licenses.
 - FileAtlas Benchmark is a separate local tool for max-settings stress tests, raw data, charts, and PDF reports.
 - Benchmark machine detection lists every detected GPU and reports the effective AC/DC performance mode separately from the underlying Windows power plan.
@@ -149,6 +154,8 @@ FileAtlas Dev is optional and intended for local diagnostics. If installed, it s
 FileAtlas Benchmark creates isolated dummy test data and local benchmark report folders. It is meant for development and release validation, not normal cleanup use.
 
 The FileAtlas 1.8.0 maximum-stress release run used 1,000,000 catalog records, 500,000 history events, a 500,000-node treemap, and 50,000 dummy files. Analytics completed its 1-hour, 24-hour, and 7-day summaries in approximately 83-121 ms. The report package includes raw metrics and explicitly marks slower maintenance paths such as full compaction and cold forensic reads.
+
+The FileAtlas 1.9.1 correctness pass used 322 automated tests with one intentional opt-in performance skip. A fresh authenticated FAStore bootstrap reopened in under one second on the release machine; the source FAFS process settled near 38 MB with 0% sampled idle CPU before elevated NTFS reconciliation began. These are local validation measurements, not universal performance guarantees.
 
 Unsigned installers may show a Windows SmartScreen warning. FileAtlas is not code-signed yet because code-signing certificates are expensive.
 
