@@ -36,6 +36,8 @@ FileAtlas may read local filesystem metadata, including:
 - local FileAtlas LicenseManager private owner keys, if the owner-only LicenseManager is used on this computer.
 - local FileAtlas Benchmark report folders, raw metrics, charts, PDFs, and dummy benchmark files, if the Benchmark tool is used.
 
+Current FileAtlas-native storage generations use authenticated encrypted binary envelopes for settings, history, snapshots, checkpoints, parity/recovery metadata, and FAStore structures. Supported older local generations may be read and atomically migrated by FAFS. Encryption is used for local integrity and access separation; it does not cause any data to be uploaded.
+
 When duplicate scanning is enabled, FileAtlas may read file contents locally to calculate cryptographic hashes. FAFS may also calculate hashes for smaller files and store recovery-oriented metadata locally. FileAtlas does not upload these hashes or metadata.
 
 ## Data FileAtlas Stores
@@ -60,6 +62,7 @@ This may include:
 - optional FileAtlas Dev license request files (`.fareq`) and debug reports only when the user chooses to create or save them.
 - optional FileAtlas LicenseManager key backups (`.fakeybackup`) and issued license files (`.falicense`) only when the owner chooses to create or save them.
 - optional FileAtlas Benchmark reports under the selected benchmark output folder, by default `Documents\FileAtlas Benchmarks`.
+- bounded encrypted Base and Analytics last-known caches used to keep completed views visible while FAFS starts or restarts. These caches remain local and do not replace the authoritative FAFS catalog or history.
 
 FileAtlas does not intentionally store copies of your files.
 
@@ -71,7 +74,7 @@ FileAtlas does not transmit file names, file contents, scan results, settings, a
 
 FileAtlas does not require an internet connection.
 
-FAFS exposes a local-only API on `127.0.0.1` for FileAtlas components on the same computer.
+FAFS exposes a local-only API on `127.0.0.1` for FileAtlas components on the same computer. Privileged FileAtlas Dev requests use an authenticated encrypted local session and short-lived FAFS capability; they are not sent over the internet.
 
 FileAtlas Dev can create an offline license request file (`.fareq`). That request contains an installation ID and public key so a license can be issued for this installation. FileAtlas does not send the request anywhere automatically; the user must manually choose to share it.
 
