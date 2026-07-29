@@ -75,7 +75,7 @@ Version: 1.6.0
 License: PSF-2.0
 
 blinker
-Version: 1.9.0
+Version: 1.9.3
 Copyright: Jason Kirtland and contributors
 License: MIT
 
