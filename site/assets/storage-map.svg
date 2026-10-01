@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-labelledby="title desc">
+  <title id="title">A simple view of disk space</title>
+  <desc id="desc">Illustrative treemap of 240 GB: Projects 96 GB, Media 72 GB, Downloads 36 GB, Documents 24 GB, and Other 12 GB. Block areas are proportional to folder size.</desc>
+  <rect width="960" height="640" fill="#0b1525"/>
+  <g font-family="Segoe UI,Arial,sans-serif" fill="#edf5ff">
+    <text x="36" y="53" font-size="24" font-weight="600">Storage overview</text>
+    <text x="36" y="87" font-size="18" fill="#aec4df">A folder’s size, at a glance.</text>
+    <text x="924" y="54" text-anchor="end" font-size="30" font-weight="600">240 GB</text>
+    <text x="924" y="85" text-anchor="end" font-size="16" fill="#aec4df">EXAMPLE DATA</text>
+    <g stroke="#0b1525" stroke-width="6">
+      <rect x="33" y="119" width="360" height="450" fill="#1759bc"/>
+      <rect x="393" y="119" width="534" height="225" fill="#207edf"/>
+      <rect x="393" y="344" width="267" height="225" fill="#163b70"/>
+      <rect x="660" y="344" width="267" height="150" fill="#34639b"/>
+      <rect x="660" y="494" width="267" height="75" fill="#243c59"/>
+    </g>
+    <g font-size="25" font-weight="600">
+      <text x="60" y="168">Projects</text><text x="420" y="168">Media</text>
+      <text x="420" y="390">Downloads</text><text x="686" y="390">Documents</text>
+    </g>
+    <g font-size="20" fill="#deedff">
+      <text x="60" y="202">96 GB</text><text x="420" y="202">72 GB</text>
+      <text x="420" y="422">36 GB</text><text x="686" y="422">24 GB</text>
+      <text x="686" y="541">Other · 12 GB</text>
+    </g>
+    <text x="36" y="611" font-size="17" fill="#aec4df">Larger block = more disk space</text>
+    <text x="924" y="611" text-anchor="end" font-size="17" fill="#aec4df">5 folders / illustrative view</text>
+  </g>
+</svg>

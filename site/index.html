@@ -5,18 +5,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000080">
-  <meta name="description" content="FileAtlas — Windows-native filesystem intelligence, history, recovery and behavioral protection.">
+  <meta name="description" content="FileAtlas for Windows: explore disk space and follow file history locally. Preview upcoming recovery and SceneNet features.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://file-atlas.com/">
   <meta property="og:title" content="FileAtlas">
-  <meta property="og:description" content="See what changed. Find what matters. Recover with evidence.">
+  <meta property="og:description" content="Explore disk space and follow file history on your own PC.">
   <meta property="og:image" content="https://file-atlas.com/assets/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="FileAtlas — Storage, History, Recovery and Protection">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FileAtlas">
-  <meta name="twitter:description" content="See what changed. Find what matters. Recover with evidence.">
+  <meta name="twitter:description" content="Explore disk space and follow file history on your own PC.">
   <meta name="twitter:image" content="https://file-atlas.com/assets/preview.png">
   <title>FileAtlas — Filesystem Intelligence for Windows</title>
   <link rel="icon" href="assets/fileatlas.ico">
@@ -24,37 +24,37 @@
   <script defer src="script.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#top">Skip to content</a>
   <header class="desktop-bar">
     <a class="brand" href="#top">
       <img src="assets/fileatlas-logo.png" alt="">
       <span>FileAtlas</span>
     </a>
-    <nav>
+    <nav aria-label="Main navigation">
       <a href="#platform">Platform</a>
       <a href="#screens">Screens</a>
       <a href="#architecture">Architecture</a>
       <a href="#download">Download</a>
     </nav>
-    <div class="clock" id="clock">--:--</div>
+    <div class="clock" id="clock" aria-label="Local time">--:--</div>
   </header>
 
   <main id="top">
     <section class="hero wrap">
       <div class="hero-copy">
         <div class="badge"><span></span> WINDOWS-NATIVE · LOCAL-FIRST</div>
-        <h1>See what changed.<br><em>Know what matters.</em></h1>
+        <h1>Disk space.<br>File history.<br><em>One local app.</em></h1>
         <p>
-          FileAtlas maps storage, records change history and brings recovery and
-          behavioral protection into one Windows-native suite.
+          Find what’s taking up space. Follow files through edits, moves, and deletions. Keep the history on your own PC.
         </p>
         <div class="actions">
-          <a class="win-button primary" href="#" data-download-latest>Download latest release</a>
+          <a class="win-button primary" href="https://github.com/File-Maker/FileAtlas/releases/latest" data-download-latest>Download latest release</a>
           <a class="win-button" href="#scenenet">Explore SceneNet 3.0</a>
         </div>
         <div class="spec-strip">
           <div><b>Windows-native</b><span>Built around NTFS and Windows telemetry</span></div>
-          <div><b>Local-first</b><span>Catalog, history and recovery stay on the machine</span></div>
-          <div><b>Operational</b><span>From anomaly to evidence in minutes</span></div>
+          <div><b>Local-first</b><span>Your catalog and history stay on your PC</span></div>
+          <div><b>No account</b><span>Open the app and explore your drives</span></div>
         </div>
       </div>
 
@@ -63,37 +63,34 @@
           <span><img src="assets/fileatlas-32.png" alt="">FileAtlas</span>
           <div class="controls"><i>—</i><i>□</i><i>×</i></div>
         </div>
-        <div class="toolbar">
-          <button>Drives</button><button>Back</button><button>Up</button><button>Refresh</button>
-          <div class="address">D:\</div>
-        </div>
-        <img class="hero-image" src="assets/treemap-main.png" alt="FileAtlas treemap interface">
-        <div class="statusbar"><span>Ready</span><span>Filesystem mapped</span></div>
+
+        <img class="hero-image" src="assets/storage-map.svg" alt="Illustrative storage map: five readable folder blocks sized by disk usage" width="960" height="640" fetchpriority="high">
+        <div class="statusbar"><span>Illustration · example data</span><span>Folder size = block size</span></div>
       </div>
     </section>
 
     <section class="ticker">
       <span>Treemap visualization</span><b>◆</b><span>Storage history</span><b>◆</b>
-      <span>Recovery coverage</span><b>◆</b><span>Forensic inspection</span><b>◆</b>
-      <span>Behavioral protection</span>
+      <span>Recovery · upcoming</span><b>◆</b><span>Forensic inspection</span><b>◆</b>
+      <span>Behavioral protection · upcoming</span>
     </section>
 <section id="platform" class="section wrap reveal">
       <div class="section-head">
         <p class="eyebrow">THE PLATFORM</p>
-        <h2>Storage visibility that keeps working<br>after the window closes.</h2>
-        <p>Explore the drive, follow the history, inspect the evidence and recover what can be recovered.</p>
+        <h2>Explore your files.<br>Look back at their history.</h2>
+        <p>Available now: storage maps, background history, and analytics. Recovery and FAAV are upcoming additions.</p>
       </div>
 
       <div class="cards">
         <article class="card big">
           <div class="card-title"><span>01</span> FileAtlas Base</div>
-          <p>Navigate large drives as a responsive treemap and move from volume to folder to file without running a new full scan for every question.</p>
+          <p>See which folders take up space. Zoom into the map, filter by size, and review files before sending them to the Recycle Bin.</p>
           <img src="assets/treemap-system.png" alt="FileAtlas system drive treemap">
         </article>
         <article class="card">
           <div class="card-title"><span>02</span> FAFS History</div>
           <p>Record what appeared, disappeared, moved or changed — including activity that happened while the desktop app was closed.</p>
-          <div class="history-visual">
+          <div class="history-visual"><p class="example-label">Illustrative activity</p>
             <div class="history-row"><b>Added</b><i class="green" style="width:72%"></i><span>+2.17 GB</span></div>
             <div class="history-row"><b>Removed</b><i class="red" style="width:38%"></i><span>-645 MB</span></div>
             <div class="history-row"><b>Changes</b><i class="blue" style="width:88%"></i><span>16,211</span></div>
@@ -104,34 +101,34 @@
               <i style="height:54%"></i><i style="height:82%"></i><i style="height:36%"></i>
             </div>
             <div class="history-events win-inset">
-              <div><span>17:42:08</span><b>moved</b><em>finance-master.key</em></div>
-              <div><span>17:42:10</span><b>changed</b><em>portal.config</em></div>
-              <div><span>17:42:13</span><b>deleted</b><em>Q3-ledger.tmp</em></div>
+              <div><span>17:42:08</span><b>moved</b><em>project-notes.txt</em></div>
+              <div><span>17:42:10</span><b>changed</b><em>draft.docx</em></div>
+              <div><span>17:42:13</span><b>deleted</b><em>old-export.zip</em></div>
             </div>
           </div>
         </article>
         <article class="card">
-          <div class="card-title"><span>03</span> Recovery</div>
-          <p>Show recovery status per object: covered, partial, deferred, failed, excluded or unavailable.</p>
+          <div class="card-title"><span>03</span> Recovery <small class="upcoming">Upcoming</small></div>
+          <p>Planned recovery tools will show what can be restored and where coverage is incomplete. User-facing recovery is not included in the current Core release.</p>
           <div class="recovery-visual win-inset">
             <div class="recovery-file">
-              <span>finance-master.key</span><b>Covered</b>
+              <span>project-notes.txt</span><b>Covered</b>
             </div>
             <div class="recovery-file">
-              <span>Q3-ledger.xlsx</span><b class="partial">Partial</b>
+              <span>report.xlsx</span><b class="partial">Partial</b>
             </div>
             <div class="recovery-file">
               <span>archive.db</span><b class="deferred">Deferred</b>
             </div>
             <div class="recovery-bar"><i style="width:68%"></i></div>
-            <small>Verified recovery coverage</small>
+            <small>Illustrative recovery coverage</small>
           </div>
         </article>
         <article class="card">
-          <div class="card-title"><span>04</span> FAAV</div>
-          <p>Observe live mutation activity, attribute likely actors and contain destructive behavior without making recovery a prerequisite for detection.</p>
+          <div class="card-title"><span>04</span> FAAV <small class="upcoming">Upcoming</small></div>
+          <p>Upcoming behavioral analysis for filesystem changes, including SceneNet. FAAV is experimental and is not a supported antivirus component of the current Core release.</p>
           <div class="faav-visual win-inset">
-            <div class="faav-status"><i></i><span>Protection active</span><b>0.87</b></div>
+            <div class="faav-status"><i></i><span>Example activity</span><b>DEMO</b></div>
             <div class="faav-wave">
               <i style="height:22%"></i><i style="height:38%"></i><i style="height:54%"></i>
               <i style="height:78%"></i><i style="height:94%"></i><i style="height:62%"></i>
@@ -142,7 +139,7 @@
         </article>
         <article class="card">
           <div class="card-title"><span>05</span> Inspector</div>
-          <p>Inspect catalog records, provenance, quality and subsystem state when an answer needs to be verified.</p>
+          <p>Inspect catalog records and recorded file details. Advanced FileAtlas Dev diagnostics require a local Dev license.</p>
           <div class="inspector-visual win-inset">
             <div class="inspector-tree">
               <span>▾ D:\</span>
@@ -164,7 +161,7 @@ generation = 42</pre>
         <div class="section-head split">
           <div>
             <p class="eyebrow">REAL PRODUCT SCREENS</p>
-            <h2>See FileAtlas<br>at work.</h2>
+            <h2>A look inside<br>the app.</h2>
           </div>
           <div class="screen-hint window">
             <div class="titlebar"><span>Viewer</span><div class="controls"><i>—</i><i>□</i><i>×</i></div></div>
@@ -173,168 +170,39 @@ generation = 42</pre>
         </div>
 
         <div class="gallery">
-          <button data-image="assets/analytics.png" data-caption="FAFS Analytics"><img src="assets/analytics.png" alt="FAFS Analytics"><span>FAFS Analytics</span></button>
-          <button data-image="assets/size-filter.png" data-caption="Size Filter"><img src="assets/size-filter.png" alt="Size filter"><span>Size Filter</span></button>
-          <button data-image="assets/inspector.png" data-caption="Catalog Inspector"><img src="assets/inspector.png" alt="Catalog Inspector"><span>Catalog Inspector</span></button>
-          <button data-image="assets/analytics-overlay.png" data-caption="Integrated Analytics"><img src="assets/analytics-overlay.png" alt="Integrated Analytics"><span>Integrated Analytics</span></button>
+          <button data-image="assets/analytics.png" data-caption="FAFS Analytics"><img src="assets/analytics.png" alt="FAFS Analytics" loading="lazy"><span>FAFS Analytics</span></button>
+          <button data-image="assets/size-filter.png" data-caption="Size Filter"><img src="assets/size-filter.png" alt="Size filter" loading="lazy"><span>Size Filter</span></button>
+          <button data-image="assets/inspector.png" data-caption="Catalog Inspector"><img src="assets/inspector.png" alt="Catalog Inspector" loading="lazy"><span>Catalog Inspector</span></button>
+          <button data-image="assets/analytics-overlay.png" data-caption="Integrated Analytics"><img src="assets/analytics-overlay.png" alt="Integrated Analytics" loading="lazy"><span>Integrated Analytics</span></button>
         </div>
       </div>
     </section>
 
 
 
-    <section id="why" class="section why-section reveal">
+    <section id="why" class="section wrap">
+      <div class="section-head"><p class="eyebrow">FILE HISTORY</p><h2>Where did that file go?</h2><p>Open an item’s history to follow its recorded changes, even after it has moved or is no longer present.</p></div>
+      <div class="history-story"><div><span>01 / FIND</span><h3>Search the catalog</h3><p>Look for a file by name or path across known files and folders.</p></div><div><span>02 / FOLLOW</span><h3>Inspect its timeline</h3><p>Follow edits, moves, renames, and Recycle Bin activity where identity and history are available.</p></div><div><span>03 / CHECK</span><h3>See its last known state</h3><p>Understand when it changed and whether it is still present. Retained history is not a backup of the file.</p></div></div>
+    </section>
+
+    <section id="scenenet" class="section scene-section">
       <div class="wrap">
-        <div class="why-head">
-          <div>
-            <p class="eyebrow">WHEN A SMALL CHANGE BECOMES AN INCIDENT</p>
-            <h2>Four kilobytes can stop a company.</h2>
-          </div>
-          <div class="impact-note window">
-            <div class="titlebar">
-              <span>Operational impact</span>
-              <div class="controls"><i>—</i><i>□</i><i>×</i></div>
+        <div class="section-head scene-heading"><p class="eyebrow">UPCOMING / SCENENET 3.0</p><h2>File activity,<br>across space and time.</h2><p>SceneNet is part of the upcoming FAAV work. Its reference design processes a 16 × 16 grid across eight time slices and 16 channels to examine patterns in filesystem activity.</p></div>
+        <div class="scene-panel window">
+          <div class="titlebar"><span><img src="assets/fileatlas-32.png" alt="">SceneNet / Activity explorer</span><span class="illustration-label">ILLUSTRATION</span></div>
+          <div class="scene-workspace">
+            <div class="scene-controls"><p class="control-label">Activity pattern</p><div class="preset-buttons" role="group" aria-label="Activity pattern"><button type="button" data-preset="routine" aria-pressed="true">Routine edits</button><button type="button" data-preset="burst" aria-pressed="false">Bulk changes</button><button type="button" data-preset="spread" aria-pressed="false">Spreading activity</button></div>
+              <label class="range-label" for="scene-time">Time slice <output id="slice-output" for="scene-time">4 / 8</output></label><input id="scene-time" type="range" min="1" max="8" value="4">
+              <label class="range-label" for="scene-intensity">Intensity <output id="intensity-output" for="scene-intensity">60%</output></label><input id="scene-intensity" type="range" min="10" max="100" value="60" step="10">
+              <button class="reset-scene" id="reset-scene" type="button">Reset illustration</button>
             </div>
-            <div class="impact-note-body">
-              <p>A missing key can block a finance portal. A moved configuration file can take production offline.</p>
-              <p>FileAtlas reduces the search from every machine and server to the object, event trail and recovery state that matter.</p>
-            </div>
+            <div class="scene-visual"><div class="map-heading"><span>Spatial activity</span><span>16 × 16 cells</span></div><div id="scene-grid" class="scene-grid" role="img" aria-label="Illustrative spatial activity grid"></div><div class="map-legend"><span>Lower</span><div aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><span>Higher activity</span></div></div>
+            <div class="scene-readout" aria-live="polite" aria-atomic="true"><p class="control-label">Pattern overview</p><h3 id="pattern-title">Routine edits</h3><p id="pattern-description">A few isolated cells change while most of the scene stays quiet.</p><div class="scene-stat"><strong id="active-cells">—</strong><span>active cells / 256</span></div><div class="scene-stat"><strong id="scene-slice">04</strong><span>time slice / 08</span></div><p class="model-note">Activity alone does not establish malicious intent.</p></div>
           </div>
+          <div class="scene-bottom">Illustrative data. This page does not run the SceneNet model or scan your files.</div>
         </div>
-
-        <div class="incident-board window">
-          <div class="titlebar">
-            <span><img src="assets/fileatlas-32.png" alt="">Monday morning — change review</span>
-            <div class="controls"><i>—</i><i>□</i><i>×</i></div>
-          </div>
-
-          <div class="incident-board-body">
-            <div class="incident-tree win95-panel">
-              <div class="panel-caption">Change trail</div>
-              <div class="tree-entry"><span>▾ Server E:</span><b>LAMBDA</b><strong>-4 KB</strong></div>
-              <div class="tree-entry indent"><span>▾ FINANCIALS Q3 2027</span><b>1 change</b></div>
-              <div class="tree-entry indent2 selected"><span>finance-master.key</span><b>missing</b></div>
-            </div>
-
-            <div class="incident-route">
-              <div class="route-step">
-                <b>01</b>
-                <span><strong>Find the object</strong>Exact path, time and change type.</span>
-              </div>
-              <div class="route-arrow">→</div>
-              <div class="route-step">
-                <b>02</b>
-                <span><strong>Check the damage</strong>Related changes and probable cause.</span>
-              </div>
-              <div class="route-arrow">→</div>
-              <div class="route-step">
-                <b>03</b>
-                <span><strong>Recover or report</strong>Verified source, or an explicit unrecoverable result.</span>
-              </div>
-            </div>
-
-            <div class="incident-metrics">
-              <div><span>Investigation path</span><strong>Minutes</strong></div>
-              <div><span>Recovery status</span><strong class="ok">Available</strong></div>
-              <div><span>Guesswork</span><strong>Removed</strong></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="scenenet" class="section scenenet-section">
-      <div class="wrap scenenet-grid reveal">
-        <div class="scenenet-copy">
-          <p class="eyebrow">UPCOMING · SCENENET 3.0 DEMO</p>
-          <h2>Behavioral AI for filesystem activity.</h2>
-          <p>
-            SceneNet 3.0 reads how filesystem activity moves, spreads and changes
-            over time, then scores the scene before damage becomes a full incident.
-          </p>
-          <p>
-            The production design is compact, bounded and Windows-native.
-          </p>
-          <div class="scenenet-stats">
-            <div><strong id="riskValue" class="fixed-readout">0.00</strong><span>risk</span></div>
-            <div><strong id="confidenceValue" class="fixed-readout">0.00</strong><span>confidence</span></div>
-            <div><strong id="classValue" class="fixed-readout class-readout">idle</strong><span>classification</span></div>
-          </div>
-          <p class="scenenet-hint">
-            Tune the scene below. The output responds to the channels you feed it.
-          </p>
-        </div>
-
-        <div class="scenenet-window window fixed-scenenet-window">
-          <div class="titlebar">
-            <span><img src="assets/fileatlas-32.png" alt="">SceneNet 3.0 — Live scene</span>
-            <div class="controls"><i>—</i><i>□</i><i>×</i></div>
-          </div>
-          <div class="scenenet-toolbar">
-            <span>Profile: interactive behavioral preview</span>
-            <div class="toolbar-actions">
-              <button id="presetBenign" type="button">Benign</button>
-              <button id="presetRansom" type="button">Ransomware-like</button>
-              <button id="resetScene" type="button">Reset</button>
-            </div>
-          </div>
-
-          <div class="scenenet-console">
-            <div class="channel-panel">
-              <div class="channel-title">Scene channels</div>
-              <label>Entropy delta
-                <input id="entropyDelta" type="range" min="0" max="100" value="18">
-                <output id="entropyDeltaOut">18</output>
-              </label>
-              <label>Write velocity
-                <input id="writeVelocity" type="range" min="0" max="100" value="24">
-                <output id="writeVelocityOut">24</output>
-              </label>
-              <label>Mutation density
-                <input id="mutationDensity" type="range" min="0" max="100" value="20">
-                <output id="mutationDensityOut">20</output>
-              </label>
-              <label>Rename / delete pressure
-                <input id="renameDelete" type="range" min="0" max="100" value="14">
-                <output id="renameDeleteOut">14</output>
-              </label>
-              <label>Dependency drift
-                <input id="dependencyDrift" type="range" min="0" max="100" value="12">
-                <output id="dependencyDriftOut">12</output>
-              </label>
-              <label>Cross-directory spread
-                <input id="spread" type="range" min="0" max="100" value="10">
-                <output id="spreadOut">10</output>
-              </label>
-              <label>Process trust inverse
-                <input id="trustInverse" type="range" min="0" max="100" value="16">
-                <output id="trustInverseOut">16</output>
-              </label>
-              <label>Filetype drift
-                <input id="filetypeDrift" type="range" min="0" max="100" value="8">
-                <output id="filetypeDriftOut">8</output>
-              </label>
-              <label>Recovery suppression
-                <input id="recoveryPressure" type="range" min="0" max="100" value="4">
-                <output id="recoveryPressureOut">4</output>
-              </label>
-            </div>
-
-            <div class="network-panel">
-              <div class="network-tabs">
-                <button class="active" type="button">Neural flow</button>
-                <button type="button">Channels</button>
-                <button type="button">Outputs</button>
-              </div>
-              <canvas id="sceneCanvas" width="980" height="560" aria-label="Interactive SceneNet 3.0 behavioral AI preview"></canvas>
-            </div>
-          </div>
-
-          <div class="statusbar">
-            <span id="sceneStatus">Scene ready</span>
-            <span id="sceneSummary">9 inputs · 12 hidden · 8 hidden · 3 outputs</span>
-          </div>
-        </div>
+        <p class="scene-note">Upcoming technology, not a feature of the current supported Core release. The visualization explains a concept; it does not demonstrate antivirus effectiveness.</p>
+        <noscript><p>Enable JavaScript to explore the illustration. SceneNet examines spatial activity across multiple time slices.</p></noscript>
       </div>
     </section>
 
@@ -342,12 +210,12 @@ generation = 42</pre>
       <div class="arch">
         <div>
           <p class="eyebrow">ENGINEERING PRINCIPLES</p>
-          <h2>Built for Windows.<br>Built to stay fast.</h2>
-          <p class="lead">Base handles navigation. FAFS and FAStore keep the catalog and history. Recovery and FAAV act on that state without turning the filesystem path into a bottleneck.</p>
+          <h2>Windows underneath.<br>Your data stays local.</h2>
+          <p class="lead">Base provides the storage view. FAFS and FAStore maintain the local catalog and history. Upcoming recovery and FAAV components build on that foundation.</p>
           <ul class="principles">
-            <li><b>01</b><span><strong>No fake measurements</strong>Unknown, stale and unavailable remain visible.</span></li>
+            <li><b>01</b><span><strong>Clear measurement states</strong>Unknown, stale and unavailable remain visible.</span></li>
             <li><b>02</b><span><strong>Filesystem-native identity</strong>Stable IDs and ancestry matter more than path strings.</span></li>
-            <li><b>03</b><span><strong>Recovery is separate from detection</strong>Containment still works when restoration does not.</span></li>
+            <li><b>03</b><span><strong>Recovery is separate from detection</strong>The upcoming design treats containment and restoration as separate capabilities.</span></li>
             <li><b>04</b><span><strong>Local-first processing</strong>Core filesystem intelligence stays on the machine.</span></li>
           </ul>
         </div>
@@ -358,16 +226,16 @@ generation = 42</pre>
             <div class="arrow">↓</div>
             <div class="row">
               <div class="node core">FAFS + FAStore<br><small>catalog · history · recovery metadata</small></div>
-              <div class="node">FAAV sensors<br><small>USN · ETW · Shield</small></div>
+              <div class="node">FAAV sensors<br><small>upcoming · USN · ETW · Shield</small></div>
             </div>
             <div class="arrow">↓</div>
             <div class="row three">
               <div class="node">FileAtlas Base<br><small>navigation</small></div>
               <div class="node">Analytics<br><small>change history</small></div>
-              <div class="node">Recovery<br><small>verified sources</small></div>
+              <div class="node">Recovery<br><small>upcoming · verified sources</small></div>
             </div>
             <div class="arrow">↓</div>
-            <div class="node">FAAV incident engine<br><small>detection · attribution · containment</small></div>
+            <div class="node">FAAV incident engine<br><small>upcoming · detection · attribution · containment</small></div>
           </div>
         </div>
       </div>
@@ -377,12 +245,12 @@ generation = 42</pre>
       <div class="wrap download-inner">
         <div>
           <p class="eyebrow">GET FILEATLAS</p>
-          <h2>Your storage already has a history.<br>Start seeing it.</h2>
-          <p>Get the newest Windows installer directly from the latest FileAtlas release.</p>
+          <h2>Download FileAtlas<br>for Windows.</h2>
+          <p>Windows 10 / 11 · 64-bit · 4 GB RAM minimum. The installer includes the runtime dependencies.</p>
         </div>
         <div class="download-actions">
-          <a class="win-button light" href="#" data-download-latest>Download for Windows</a>
-          <a href="https://github.com/File-Maker/FileAtlas">View GitHub repository →</a>
+          <a class="win-button light" href="https://github.com/File-Maker/FileAtlas/releases/latest" data-download-latest>Download for Windows</a>
+          <a href="https://github.com/File-Maker/FileAtlas/releases/latest">Release notes</a><span id="release-status" role="status">Latest release on GitHub</span><small class="installer-note">The current installer is unsigned. Windows SmartScreen may show a warning.</small>
         </div>
       </div>
     </section>
@@ -390,13 +258,13 @@ generation = 42</pre>
 
   <footer class="footer wrap">
     <a class="brand" href="#top"><img src="assets/fileatlas-logo.png" alt=""><span>FileAtlas</span></a>
-    <p>© 2026 Saba Iakobidze. All rights reserved.</p>
-    <div><a href="mailto:iakobidzesab@gmail.com">Support</a><a href="https://github.com/File-Maker/FileAtlas">GitHub</a></div>
+    <p>Copyright © 2026 Saba Iakobidze. All rights reserved.</p>
+    <div><a href="mailto:iakobidzesab@gmail.com">Support</a><a href="https://github.com/File-Maker/FileAtlas">GitHub</a><a href="https://github.com/File-Maker/FileAtlas/blob/main/PRIVACY.md">Privacy</a><a href="https://github.com/File-Maker/FileAtlas/blob/main/THIRD-PARTY-NOTICES.txt">Notices</a></div>
   </footer>
 
-  <dialog id="lightbox">
-    <div class="titlebar"><span id="lightbox-title">Preview</span><button id="close">×</button></div>
-    <img id="lightbox-image" src="" alt="">
+  <dialog id="lightbox" aria-labelledby="lightbox-title">
+    <div class="titlebar"><span id="lightbox-title">Preview</span><button id="close" type="button" aria-label="Close screenshot">×</button></div>
+    <img id="lightbox-image" alt="">
   </dialog>
 </body>
 </html>
