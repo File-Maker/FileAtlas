@@ -142,7 +142,7 @@ If you contact support by email, any information you choose to include in that e
 Support email:
 
 ```text
-iakobidzesab@gmail.com
+si@file-atlas.com
 ```
 
 ## Third-party components
