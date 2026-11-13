@@ -1,6 +1,6 @@
-# FileAtlas 2.0.0
+# FileAtlas 2.0.1
 
-FileAtlas is a local Windows storage suite with a retro Windows 95-style interface. Version 2.0.0 combines the Base treemap, the FAFS filesystem historian, FileAtlas Analytics, and optional diagnostic/development tools into one local storage-history product.
+FileAtlas is a local Windows storage suite with a retro Windows 95-style interface. Version 2.0.1 combines the Base treemap, the FAFS filesystem historian, FileAtlas Analytics, and optional diagnostic/development tools into one local storage-history product.
 
 FileAtlas is designed to answer two different questions:
 
@@ -11,15 +11,15 @@ Copyright © 2026 Saba Iakobidze. All rights reserved.
 
 ## Release status
 
-**FileAtlas Core 2.0.0 is the supported release scope.**
+**FileAtlas Core 2.0.1 is the supported release scope.**
 
 The current Core release includes Base, FAFS, FAStore, Analytics, History, search, Dev diagnostics, licensing compatibility, and the benchmark/proving path described below. (Benchmark not included though, just update encompasses it)
 
-### FAAV status for 2.0.0
+### FAAV status for 2.0.1
 
-**FileAtlas Anti-Virus (FAAV) is not being developed, validated, or supported as part of this 2.0.0 release. Do not install FAAV for normal use.**
+**FileAtlas Anti-Virus (FAAV) is not being developed, validated, or supported as part of this 2.0.1 release. Do not install FAAV for normal use.**
 
-Some existing installers, component lists, source paths, or owner tools may still contain older FAAV binaries or FAAV-related artifacts. Their presence does **not** mean FAAV is part of the supported 2.0.0 product. If you deliberately install or run those components, you do so entirely at your own risk and without any production-support or detection-effectiveness claim from this release.
+Some existing installers, component lists, source paths, or owner tools may still contain older FAAV binaries or FAAV-related artifacts. Their presence does **not** mean FAAV is part of the supported 2.0.1 product. If you deliberately install or run those components, you do so entirely at your own risk and without any production-support or detection-effectiveness claim from this release.
 
 No statement in this README should be read as claiming that the older FAAV build provides production-ready malware prevention, quarantine, recovery, or representative real-world antivirus effectiveness.
 
@@ -28,16 +28,16 @@ No statement in this README should be read as claiming that the older FAAV build
 Public installer:
 
 ```text
-FileAtlasSetup-2.0.0.exe
+FileAtlasSetup-2.0.1.exe
 ```
 
 Normal users only need the FileAtlas installer. Python and application runtime dependencies are bundled into the packaged build and are not required separately on the user's computer.
 
 Separate tools:
 
-- `FileAtlasLicenseManagerSetup-2.0.0.exe` — owner-only tool for issuing and inspecting FileAtlas Dev licenses.
-- `FileAtlasBenchmarkSetup-2.0.0.exe` — local benchmark/report tool for FileAtlas Core stress testing.
-- `FileAtlasFAAVLabSetup-2.0.0.exe` — owner-only legacy/experimental FAAV Lab package. It is **not** part of the supported public 2.0.0 release and is not required by normal users.
+- `FileAtlasLicenseManagerSetup-2.0.1.exe` — owner-only tool for issuing and inspecting FileAtlas Dev licenses.
+- `FileAtlasBenchmarkSetup-2.0.1.exe` — local benchmark/report tool for FileAtlas Core stress testing.
+- `FileAtlasFAAVLabSetup-2.0.1.exe` — owner-only legacy/experimental FAAV Lab package. It is **not** part of the supported public 2.0.1 release and is not required by normal users.
 
 ## Verify download — optional
 
@@ -48,18 +48,15 @@ The SHA-256 checksums for the current installer set are recorded in:
 On Windows PowerShell:
 
 ```powershell
-Get-FileHash -Algorithm SHA256 .\FileAtlasSetup-2.0.0.exe
+Get-FileHash -Algorithm SHA256 .\FileAtlasSetup-2.0.1.exe
 ```
 
-Expected SHA-256 for the current public installer:
-
-```text
-9A76586D6E40222529CA4C26A2B2C88F07A439AE158FACC9AEA0A94CC166D726
-```
+*(Note: Refer to `SHA256SUMS.txt` in your release bundle for the authoritative 2.0.1 installer checksums.)*
 
 ## Documentation
 
 - [Release description](RELEASE_DESCRIPTION.md)
+- [Project continuity and disaster recovery](docs/PROJECT_CONTINUITY.md)
 - [Privacy policy](PRIVACY.md)
 - [Third-party notices](THIRD-PARTY-NOTICES.txt)
 
@@ -137,31 +134,27 @@ FAFS is the local FileAtlas background foundation and the authoritative source f
 - Can generate local raw metrics, charts, Markdown reports, and technical PDF reports in the selected benchmark output folder.
 - Benchmark results are local measurements, not universal hardware guarantees.
 
-## Current 2.0.0 Core verification
+## Current 2.0.1 Core verification and known issues
 
-The final Core corrective pass was validated on the installed build, not only from source.
+Version 2.0.1 introduces stability improvements for shared IPC sessions, token caching, hidden background console flags, off-thread deletion, and system-tray daemon persistence. 
 
-Observed local proof included:
+### Known issues in 2.0.1 (scheduled for 2.0.2+)
 
-- installation completed successfully;
-- the installed FAFS binary matched the built artifact exactly;
-- an existing catalog of approximately **1.8 million items** was preserved and reopened;
-- FAFS reported no watcher errors during the installation proof;
-- newly created file/folder activity appeared in the historian immediately enough for the focused proof run (a create was observed in roughly **182 ms**, and tested deletions in roughly **33 ms** on that machine);
-- a file lifecycle was shown as **edited → moved to Recycle Bin → removed from Recycle Bin** using the same native identity;
-- the final state correctly reported the deleted object as **no longer present**;
-- `C:\` history successfully handled real high-volume system/Recycling activity rather than only a quiet test drive;
-- history/search returned the requested object rather than an unrelated stale identity;
-- identity-less legacy records were explicitly excluded from exact item history instead of being guessed into the result.
+The following behaviors remain active in 2.0.1 and are queued for resolution in upcoming 2.0.2+ releases:
 
-These are local release-machine observations and are not latency or performance guarantees for other systems.
+- **Analytics range & scope mismatches:** Wider time ranges or drive switches may display a bounded captured-events preview (`partial-live-tail`) while historical archive queries complete, temporarily showing smaller figures than a completed narrower range.
+- **Cold-start and scoped query latency:** Initial cold reads of large folders (e.g., `System32`, `WindowsApps`) and scoped historical queries can take several seconds while background baseline or archive decoding runs.
+- **Large directory pagination & dense treemap rendering:** Catalog child listings cap at 5,000 rows without continuation paging, and ultra-dense folders (such as `WinSxS`) may leave unrepresented black background regions when fallback drawing limits are reached.
+- **Pending UI states & coverage rounding:** Loading states in Analytics may render `0 B` bars alongside `...` metrics, and near-complete recovery audits (e.g., 99.95%) may round up to `100.0%` while still in progress.
+- **Catalog metadata & snapshot edges:** Unverified zero-byte shallow file records may be flagged as `size_known=True`, and concurrent writes during multi-phase reads can attach a newer sequence watermark to slightly older rows.
+- **Daemon lifecycle & startup prompts:** Depending on cold-start timing, FAFS warmup delays can still cause settings save timeouts, brief PowerShell flashes, or `"failed to start the python interpreter"` errors if the FAFS service attempts to respawn Analytics during uninstallation.
 
-## What is deliberately not included or supported in 2.0.0
+## What is deliberately not included or supported in 2.0.1
 
 To keep the release boundary explicit:
 
-- **FAAV is not a supported 2.0.0 component.** Do not install it for normal use. Older FAAV binaries/artifacts may still exist in the repository/installer ecosystem, but this release makes no production antivirus claim for them.
-- **No representative independent antivirus evaluation is claimed.** There is no supported 2.0.0 statement that FAAV will detect or stop real-world malware.
+- **FAAV is not a supported 2.0.1 component.** Do not install it for normal use. Older FAAV binaries/artifacts may still exist in the repository/installer ecosystem, but this release makes no production antivirus claim for them.
+- **No representative independent antivirus evaluation is claimed.** There is no supported 2.0.1 statement that FAAV will detect or stop real-world malware.
 - **FileAtlas Recovery is not a user-facing file-recovery product in this release.** FAFS can retain recovery-oriented identity/hash/chunk/parity metadata, but FAFS by itself does not promise that deleted files can be restored.
 - **FileAtlas Dev is not a universal file editor.** Generic/raw inspection exists for diagnostics, but this release does not claim built-in PDF editing, Office editing, CAD, Photoshop-like editing, or a universal binary editor/viewer.
 - **No cloud sync, cloud analytics, remote telemetry, or online account is required or provided by Core.** FileAtlas remains local-only.
@@ -219,7 +212,7 @@ If you delete something important and later empty the Recycle Bin, the file may 
 
 The first scan or reconciliation of a large drive can take time because Windows does not store recursive folder sizes as instant metadata. FileAtlas keeps the UI responsive by publishing known state first and letting deeper work continue in the background.
 
-FileAtlas Analytics can run in the tray and reuse the existing instance instead of creating duplicate dashboards.
+FileAtlas Analytics can run in the tray and reuse the existing instance instead of creating duplicate dashboards. Closing a window keeps FAFS and Analytics running in the background; use the system tray's **Quit** option to shut down background services cleanly.
 
 FileAtlas Dev is optional. It remains locked until FAFS validates a local Dev license.
 
