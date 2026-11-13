@@ -230,7 +230,7 @@ Unsigned installers may show a Windows SmartScreen warning. FileAtlas is not cod
 For help, email:
 
 ```text
-iakobidzesab@gmail.com
+si@file-atlas.com
 ```
 
 ## Privacy and notices
